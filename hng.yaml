@@ -10,19 +10,19 @@ paths:
   /auth/login:
     post:
       summary: Gives user access to resources
-      requestBody:	
+      requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/LoginRequest'
             examples:
-                example-1:
-                  value:
-                    email: "prebstamar"
-                    password: "succesfulpasscode"
+              example-1:
+                value:
+                  email: "prebstamar"
+                  password: "succesfulpasscode"
       responses:
         '200':
-          description: Succesfully logged in
+          description: Successfully logged in
           content:
             application/json:
               schema:
@@ -31,9 +31,9 @@ paths:
                 example-1:
                   value:
                     token: "djfikdoklsosjfodkdfi8489rjdksdodjdoldjdfl"
-                    status: "succesful"
+                    status: "successful"
         '401':
-          description: Unauthorised access
+          description: Unauthorized access
           content:
             application/json:
               schema:
@@ -44,24 +44,25 @@ paths:
                     message: "invalid email or password"
                     status: "error"
                     code: 401
+
   /auth/magic-link:
     post:
-      summary: Authetication with magic link
+      summary: Authentication with magic link
       requestBody:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/MagicLinkRequest'
-          examples:
-            example-1:
-             value:
-              email: "peter@gmail.com"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MagicLinkRequest'
+            examples:
+              example-1:
+                value:
+                  email: "peter@gmail.com"
       responses:
         '200':
           description: Magic Link sent
         '400':
           description: Bad request
-           content:
+          content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -71,6 +72,7 @@ paths:
                     message: "invalid email or password"
                     status: "error"
                     code: 401
+
   /auth/change-password:
     post:
       summary: Changes the password of the user
@@ -84,12 +86,12 @@ paths:
                 value:
                   oldPassword: "oldCode"
                   newPassword: "newCode"
-      responses: 
+      responses:
         '200':
           description: Password changed
         '400':
           description: Bad request
-           content:
+          content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -99,26 +101,27 @@ paths:
                     message: "password incorrect"
                     status: "error"
                     code: 400
+
   /messages/email:
     post:
       summary: Users are able to send emails with this
-      requestBody:	
+      requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/EmailRequest'
-	          examples:
+            examples:
               example-1:
                 value:
                   emailTo: "prosper@gmail.com"
                   subject: "Welcome brother prosper"
                   body: "We want to welcome you into our denomination"
-      responses: 
+      responses:
         '200':
-          description: Email sent succesfully
+          description: Email sent successfully
         '400':
           description: Bad request
-           content:
+          content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -127,27 +130,28 @@ paths:
                   value:
                     message: "error processing email request"
                     status: "error"
-                    code: 400       
+                    code: 400
+
   /payments/stripe:
     post:
       summary: Processes stripe payment
-      requestBody:	
+      requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/StripePaymentRequest'
-	          examples:
+            examples:
               example-1:
                 value:
                   amount: 50.0
                   currency: "USD"
                   source: "tok_visa"
-      responses: 
+      responses:
         '200':
-          description: Payment succesfully processed
+          description: Payment successfully processed
         '400':
           description: Bad request
-           content:
+          content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -157,26 +161,27 @@ paths:
                     message: "error processing payment request"
                     status: "error"
                     code: 400
-   /payments/flutterwave:
+
+  /payments/flutterwave:
     post:
       summary: Processes flutterwave payment
-      requestBody:	
+      requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/FlutterwavePaymentRequest'
-	          examples:
+            examples:
               example-1:
                 value:
                   amount: 150.0
                   currency: "NGN"
                   source: "flw_card"
-      responses: 
+      responses:
         '200':
-          description: Payment succesfully processed
+          description: Payment successfully processed
         '400':
           description: Bad request
-           content:
+          content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -186,6 +191,7 @@ paths:
                     message: "error processing payment request"
                     status: "error"
                     code: 400
+
   /users:
     get:
       summary: Get all users
@@ -200,8 +206,8 @@ paths:
                   $ref: '#/components/schemas/User'
               examples:
                 example-1:
-                  value: [{"id":1, "name":"Prebor Tamarakro", "email":"prebstamar@gmail.com","organization":{"id":1, "name":"prebsOrg"}},{"id":2, "name":"Peter Emmanuel", "email":"peteremma@gmail.com","organization":{"id":1, "name":"prebsOrg"}}]    
-    post: 
+                  value: [{"id":1, "name":"Prebor Tamarakro", "email":"prebstamar@gmail.com","organization":{"id":1, "name":"prebsOrg"}},{"id":2, "name":"Peter Emmanuel", "email":"peteremma@gmail.com","organization":{"id":1, "name":"prebsOrg"}}]
+    post:
       summary: Create a new user
       requestBody:
         content:
@@ -216,7 +222,7 @@ paths:
                   password_hash: "hashedPasscode"
                   organization_id: 1
       responses:
-       '201':
+        '201':
           description: User has been added to database
           content:
             application/json:
@@ -231,7 +237,7 @@ paths:
                     organization: {"id":1, "name":"prebsOrg"}
         '400':
           description: Bad request
-           content:
+          content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -241,6 +247,7 @@ paths:
                     message: "User could not be persisted"
                     status: "error"
                     code: 400
+
   /users/{id}:
     get:
       summary: Get a user by ID
@@ -248,7 +255,7 @@ paths:
         - name: id
           in: path
           required: true
-          schema: 
+          schema:
             type: integer
       responses:
         '200':
@@ -266,7 +273,7 @@ paths:
                     organization: {"id":1, "name":"prebsOrg"}
         '404':
           description: User not found
-           content:
+          content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -290,15 +297,15 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserUpdateRequest'
-             examples:
-                example-1:
-                  value:
-                    email: "emma@gmail.com"
-                    name:  "updated user"
-                    password: "dgfhkodos"  
+            examples:
+              example-1:
+                value:
+                  email: "emma@gmail.com"
+                  name: "updated user"
+                  password: "dgfhkodos"
       responses:
         '200':
-          description: User updated succesfully
+          description: User updated successfully
           content:
             application/json:
               schema:
@@ -311,7 +318,7 @@ paths:
                     name: "Prebor Emmanuel"
         '404':
           description: User not found
-           content:
+          content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -321,18 +328,19 @@ paths:
                     message: "User could not be located"
                     status: "not found"
                     code: 404
+
   /organizations:
     get:
       summary: Get all possible organizations
       responses:
-      '200':
+        '200':
           description: A list of organizations
           content:
             application/json:
               schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Organization'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
               examples:
                 example-1:
                   value: [{"id":1, "name":"prebsOrg"},{id":2, "name":"emmasOrg"}]
@@ -344,12 +352,12 @@ paths:
             schema:
               $ref: '#/components/schemas/Organization'
             examples:
-                example-1:
-                  value:
-                    name: "prebsOrg"
+              example-1:
+                value:
+                  name: "prebsOrg"
       responses:
         '201':
-          description: Organization has been added to database
+          description: Organization has been persisted
           content:
             application/json:
               schema:
@@ -358,181 +366,19 @@ paths:
                 example-1:
                   value:
                     id: 1
-                    name: "tamarsOrg"
-      '400':
-          description: Bad request
-           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                example-1:
-                  value:
-                    message: "Department could not be persisted"
-                    status: "error"
-                    code: 400             
-  /blog/posts:
-    get:
-      summary: Get all blog posts
-      responses:
-        '200':
-          description: A list of blog posts
-          content:
-            application/json:
-              schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/BlogPost'
-              examples:
-                example-1:
-                  value: [{"id":1,"title":"firstPost","content":"This is the first post", "author":{"id":1, "name":"Prebor Tamarakro", "email":"prebor@gmail.com"},"created_at":"2024-01-01T00:00:00Z}, {"id":2,"title":"secondPost","content":"This is the second post", "author":"author2","created_at":"2024-01-01T00:00:00Z}]
-    post:
-      summary: Create a new blog post
-      requestBody:
-        content:
-          application/json:
-            schema: 
-              $ref: '#/components/schemas/BlogPost'
-            examples:
-              example-1:
-                value:
-                title: "New post"
-                content: "This is a new post"
-                author_id: 1
-      responses:
-        '201':
-          description: Blog has been added to database
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BlogPost'
-              examples:
-                example-1:
-                  value:
-                    id: 3
-                    title: "New post"
-                    content: "This na my post"
-                    author: {"id":1, "name":"Prebor Tamarakro", "email":"prebor@gmail.com"}
+                    name: "prebsOrg"
         '400':
-          description: Error persisting post
-           content:
+          description: Bad request
+          content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
               examples:
                 example-1:
                   value:
-                    message: "Blog could not be persisted"
+                    message: "Organization could not be persisted"
                     status: "error"
-                    code: 400            
-  /blog/posts/{id}:
-    get:
-      summary: Get a post by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema: 
-            type: integer
-      responses:
-        '200':
-          description: A blog content
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BlogPost'
-              examples:
-              example-1:
-                value:
-                title: "New post"
-                content: "This is a new post"
-                author:
-                  id: 1
-                  email: "prebstam@gmail.com"
-                  name: "Divine Prebor"
-        '404':
-          description: Post not found
-           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                example-1:
-                  value:
-                    message: "Blog could not be located"
-                    status: "not found"
-                    code: 404
-    put:
-      summary: Update a blog post
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json: 
-            schema:
-              $ref: '#/components/schemas/BlogPost'
-                 examples:
-              example-1:
-                value:
-                title: "New updated post"
-                content: "This is an updated post"
-                author: 1
-      responses:
-        '200':
-          description: An updated blog content
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BlogPost'
-              examples:
-              example-1:
-                value:
-                id: 1
-                title: "New updated post"
-                content: "This is an updated post"
-                author:
-                  id: 1
-                  email: "prebstam@gmail.com"
-                  name: "Divine Prebor"
-        '404':
-          description: Post not found
-           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                example-1:
-                  value:
-                    message: "Blog could not be located"
-                    status: "not found"
-                    code: 404
-    delete:
-      summary: Delete a post
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Blog Post deleted
-        '404':
-          description: Post not found
-           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                example-1:
-                  value:
-                    message: "Blog could not be located"
-                    status: "not found"
-                    code: 404  
+                    code: 400 
 components:
   schemas:
     LoginRequest:
