@@ -15,11 +15,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/LoginRequest'
-	          examples:
-              example-1:
-                value:
-                  email: "peter@gmail.com"
-                  password: "passcode"
+            examples:
+                example-1:
+                  value:
+                    email: "prebstamar"
+                    password: "succesfulpasscode"
       responses:
         '200':
           description: Succesfully logged in
