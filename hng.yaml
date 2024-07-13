@@ -271,7 +271,7 @@ paths:
                     name: "Prebor Emmanuel"
                     email: "emma@gmail.com"
                     organization: {"id":1, "name":"prebsOrg"}
-        '404':
+        '400':
           description: User not found
           content:
             application/json:
@@ -282,7 +282,7 @@ paths:
                   value:
                     message: "User could not be located"
                     status: "not found"
-                    code: 404
+                    code: 400
     put:
       summary: Update user information
       parameters:
@@ -316,7 +316,7 @@ paths:
                     id: 1
                     email: "emma@gmail.com"
                     name: "Prebor Emmanuel"
-        '404':
+        '400':
           description: User not found
           content:
             application/json:
@@ -327,7 +327,7 @@ paths:
                   value:
                     message: "User could not be located"
                     status: "not found"
-                    code: 404
+                    code: 400
 
   /organizations:
     get:
